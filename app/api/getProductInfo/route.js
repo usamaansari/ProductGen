@@ -157,16 +157,16 @@ export async function GET(req, res) {
     // The data is validated responses with a robust Joi schema.
     const ValidatedData = await ValidateProductData(parsedJson);
     console.log("Validate test", ValidatedData);
-
-    // Web scrapping with puppeteer for real-world data enrichment.
-    const EnrichedData = await EnrichProductData(ValidatedData);
-    console.log(EnrichedData);
-
-    /*
+  /*
 if(!isValidated.success){
     return NextResponse.json({msg:"Data schema is not valid"}, {status: 400})
 }
 */
+    // Web scrapping with puppeteer for real-world data enrichment.
+    const EnrichedData = await EnrichProductData(ValidatedData);
+    console.log(EnrichedData);
+
+  
 
     return NextResponse.json(EnrichedData, { status: 200 });
   } catch (error) {

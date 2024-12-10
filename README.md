@@ -35,7 +35,6 @@ This is a **Next.js** project that generates dynamic product information using t
 1. Clone the repository:
    ```bash
    git clone https://github.com/usamaansari/ProductGen.git
-   cd dynamic-product-info-generator
    ```
 2. Install dependencies
 
@@ -47,7 +46,9 @@ yarn install
 
 3. Set up environment variables:
 
-Create a .env file in the project root.
+- Create a .env file in the project root.
+- Generate OpenAI API key acccording to https://platform.openai.com/docs/quickstart
+- Add OPENAI_API_KEY in the .env file
 
 ```env
 OPENAI_API_KEY=your_openai_api_key
@@ -61,20 +62,20 @@ npm run dev
 yarn dev
 ```
 
-The app will be available at http://localhost:3000.
+The app will be available at http://localhost:3000
 
 ## Usage
 
 ### API Endpoint
 
-GET /api/generateProductInfo
+GET /api/getProductInfo
 
 Query Parameters
 query (string): The product name or description to generate information for.
 Example Request
 
 ```bash
-GET /api/generateProductInfo?query=RoboBuddy+3000
+GET /api/getProductInfo?query=Apple 16 pro max
 ```
 
 ## Data Validation
