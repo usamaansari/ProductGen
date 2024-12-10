@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dynamic Product Information Generator
+
+This is a **Next.js** project that generates dynamic product information using the **OpenAI API**. The application automates the creation of detailed and structured product data, including specifications, pricing, reviews, and more. It ensures accuracy and reliability through schema validation and provides this functionality via a REST API endpoint.
+
+---
+
+## Features
+
+- **Dynamic Product Data Creation**: Automatically generates rich product details based on a query string.
+- **OpenAI API Integration**: Uses OpenAI models to generate product information dynamically.
+- **Data Validation**: Validates generated data using **Zod schemas** to ensure correctness and structure.
+- **REST API**: Exposes an endpoint to fetch product data for integration into other applications.
+- **Error Handling**: Provides detailed error messages when validation fails.
+
+---
+
+## Technologies Used
+
+- **Next.js**: Framework for building server-rendered React applications.
+- **OpenAI API**: To generate product-related data dynamically.
+- **Zod**: For schema-based validation of the generated data.
+- **TypeScript**: Adds type safety to the codebase.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- **Node.js** (v14+)
+- **npm** or **yarn**
+- An OpenAI API key
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/dynamic-product-info-generator.git
+   cd dynamic-product-info-generator
+   ```
+2. Install dependencies
 
 ```bash
-npm run dev
+npm install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set up environment variables:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Create a .env file in the project root.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+OPENAI_API_KEY=your_openai_api_key
+```
