@@ -123,10 +123,15 @@ export async function GET(req, res) {
       },
     };
 
+    // Dynamic Product information generated using OpenAI model with the prompt using product name from query string.
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are a product information specialist. Generate detailed, realistic product information based on the given product name. Include specifications, pricing, and manufacturer details." },
+        {
+          role: "system",
+          content:
+            "You are a product information specialist. Generate detailed, realistic product information based on the given product name. Include specifications, pricing, and manufacturer details.",
+        },
         {
           role: "user",
           content: `Create the JSON Object with the information for the product ${productName}. This json object should also include the reviews of product. It should also follow the data schema of ${JSON.stringify(
@@ -135,33 +140,36 @@ export async function GET(req, res) {
         },
       ],
       temperature: 0.7,
-      max_tokens: 1000
+      max_tokens: 1000,
     });
     console.log(completion.choices[0].message.content);
 
     const outputText = completion.choices[0].message.content;
+
     // Extract JSON using a temporary variable
     const jsonStart = outputText.indexOf("{");
     const jsonEnd = outputText.lastIndexOf("}") + 1; // Include the closing brace
     const extractedJson = outputText.substring(jsonStart, jsonEnd);
 
-    // Parse and log the JSON
+    // Parse the JSON of the dynamic product information
     const parsedJson = JSON.parse(extractedJson);
-const ValidatedData= await ValidateProductData(parsedJson)
-console.log("Validate test", ValidatedData)
 
-const EnrichedData = await EnrichProductData(ValidatedData)
-console.log(EnrichedData)
+    // The data is validated responses with a robust Joi schema.
+    const ValidatedData = await ValidateProductData(parsedJson);
+    console.log("Validate test", ValidatedData);
 
-/*
+    // Web scrapping with puppeteer for real-world data enrichment.
+    const EnrichedData = await EnrichProductData(ValidatedData);
+    console.log(EnrichedData);
+
+    /*
 if(!isValidated.success){
     return NextResponse.json({msg:"Data schema is not valid"}, {status: 400})
 }
 */
 
-    return NextResponse.json(EnrichedData, { status: 200 }); 
+    return NextResponse.json(EnrichedData, { status: 200 });
   } catch (error) {
     return NextResponse.json(error.message, { status: 500 });
   }
 }
-

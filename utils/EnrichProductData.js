@@ -5,9 +5,6 @@ export async function EnrichProductData(productData) {
     // Enrich with real market prices
     const priceData = await fetchMarketPrices(productData.product.name);
     
-    // Enrich with real reviews
-   // const reviews = await scrapeProductReviews(productData.product.name);
-    
     return {
       ...productData,
       product: {
@@ -51,34 +48,3 @@ async function fetchMarketPrices(productName) {
     return {};
   }
 }
-
-/*
-async function scrapeProductReviews(productName) {
-  try {
-    const browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox']
-    });
-    const page = await browser.newPage();
-    
-    // Amazon reviews
-    await page.goto(`https://www.amazon.com/s?k=${encodeURIComponent(productName)}`);
-    const amazonReviews = await page.$$eval('.review', reviews =>
-      reviews.slice(0, 5).map(review => ({
-        source: 'Amazon',
-        rating: parseInt(review.querySelector('.rating').textContent),
-        comment: review.querySelector('.review-text').textContent,
-        user: review.querySelector('.user').textContent,
-        date: new Date().toISOString()
-      }))
-    );
-    
-    await browser.close();
-    
-    return amazonReviews;
-  } catch (error) {
-   console.log(error);
-    return [];
-  }
-}
-  */
